@@ -42,5 +42,4 @@ inc/
 # End of https://www.toptal.com/developers/gitignore/api/perl
 
 
-## for this project
-/Application/local
+/local

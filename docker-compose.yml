@@ -21,10 +21,12 @@ services:
     container_name: app_server
     depends_on:
       - rdb
+    ports: 
+      - 3000:3000
     volumes:
-      - ./server/Application:/app # work dir
+      - ./server:/opt/application # work dir
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    command: carton exec -- perl -Ilib main.pl
+    command: carton exec -- ./script/application prefork
   front:
     image: nginx
     container_name: web_front
