@@ -1,1 +1,3 @@
-# training-perl-application
+# Perl Application Training
+
+- 練習
