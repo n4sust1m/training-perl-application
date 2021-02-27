@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  rdb: # 3306
+    build:
+      context: .
+      dockerfile: ./rdb/Dockerfile
+    container_name: mysql_db
+    volumes:
+      - ./rdb/data:/var/lib/mysql
+      - ./rdb/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./rdb/db/sql:/docker-entrypoint-initdb.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks: 
+      - network_server
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    container_name: app_server
+    depends_on:
+      - rdb
+    volumes:
+      - ./server/Application:/app # work dir
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    command: carton exec -- perl -Ilib main.pl
+  front:
+    image: nginx
+    container_name: web_front
+    depends_on:
+      - server
+    ports: 
+      - 8080:80
+    volumes: 
+      - ./front/app/dst:/usr/share/nginx/html
+      - ./front/nginx/conf.d:/etc/nginx/conf.d
+    networks: 
+      - network_app
+      - network_server
+
+networks:
+  network_app:
+    driver: bridge
+  network_server:
+    driver: bridge
+
+
