@@ -9,7 +9,7 @@ services:
     volumes:
       - ./rdb/data:/var/lib/mysql
       - ./rdb/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./rdb/db/sql:/docker-entrypoint-initdb.d
+      - ./rdb/db/sql/:/docker-entrypoint-initdb.d/
       - /var/run/docker.sock:/tmp/docker.sock:ro
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks: 

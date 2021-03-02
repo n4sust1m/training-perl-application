@@ -1,4 +1,9 @@
+# Application Framework
 requires "Mojo";
 requires "Mojo::File";
 
+# DB Connector
+requires "Mojo::mysql";
+
+# Utilities
 requires "List::Util";
