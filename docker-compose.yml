@@ -22,18 +22,18 @@ services:
     depends_on:
       - rdb
     ports: 
-      - 3000:3000
+      - 8080:3000
     volumes:
       - ./server:/opt/application # work dir
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    command: carton exec -- ./script/application prefork
+    command: bash -c "carton install && carton exec -- ./script/application prefork"
   front:
     image: nginx
     container_name: web_front
     depends_on:
       - server
     ports: 
-      - 8080:80
+      - 8081:80
     volumes: 
       - ./front/app/dst:/usr/share/nginx/html
       - ./front/nginx/conf.d:/etc/nginx/conf.d
