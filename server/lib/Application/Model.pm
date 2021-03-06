@@ -1,6 +1,6 @@
 my $dbuser = 'root';
 my $passwd = 'root-passwd';
-my $hostname = 'mysqldb:3306';
+my $hostname = 'mysql_db:3306';
 my $database = 'service_db';
 
 package Application::Model {

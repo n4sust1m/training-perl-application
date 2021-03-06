@@ -5,8 +5,6 @@ use Application::Model;
 my $model = Application::Model->new();
 my $db = $model->handler->db;
 
-use DDP;
-
 sub select_all {
     my $records = $db->query('SELECT * FROM user');
     my @result;

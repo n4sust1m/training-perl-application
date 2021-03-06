@@ -7,9 +7,6 @@ use Application::Model::User;
 sub welcome ($self) {
     my $user = Application::Model::User->select_all;
 
-    use DDP; warn np $user;
-    warn np @$user;
-
     my $text = $user->[0]->{name};
 
     # Render template "example/welcome.html.ep" with message
