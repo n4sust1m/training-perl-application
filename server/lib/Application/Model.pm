@@ -1,6 +1,6 @@
 my $dbuser = 'root';
 my $passwd = 'root-passwd';
-my $hostname = 'mysql_db';
+my $hostname = 'mysqldb:3306';
 my $database = 'service_db';
 
 package Application::Model {
@@ -9,7 +9,7 @@ package Application::Model {
 
     has 'handler' => (
         is => 'rw',
-        isa => 'DBD::mysql',
+        isa => 'Mojo::mysql',
     );
 
     # constructor

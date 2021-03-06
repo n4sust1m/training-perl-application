@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./rdb/Dockerfile
-    container_name: mysql_db
+    container_name: mysqldb
     volumes:
       - ./rdb/data:/var/lib/mysql
       - ./rdb/my.cnf:/etc/mysql/conf.d/my.cnf
@@ -13,12 +13,12 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks: 
-      - network_server
+      - backend_network
   server:
     build:
       context: .
       dockerfile: ./server/Dockerfile
-    container_name: app_server
+    container_name: appserver
     depends_on:
       - rdb
     ports: 
@@ -27,9 +27,12 @@ services:
       - ./server:/opt/application # work dir
       - /var/run/docker.sock:/tmp/docker.sock:ro
     command: bash -c "carton install && carton exec -- ./script/application prefork"
+    networks:
+      - backend_network
+      - application_network
   front:
     image: nginx
-    container_name: web_front
+    container_name: webfront
     depends_on:
       - server
     ports: 
@@ -38,13 +41,12 @@ services:
       - ./front/app/dst:/usr/share/nginx/html
       - ./front/nginx/conf.d:/etc/nginx/conf.d
     networks: 
-      - network_app
-      - network_server
+      - application_network
 
 networks:
-  network_app:
+  backend_network:
     driver: bridge
-  network_server:
+  application_network:
     driver: bridge
 
 

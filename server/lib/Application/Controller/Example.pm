@@ -5,9 +5,12 @@ use Application::Model::User;
 
 # This action will render a template
 sub welcome ($self) {
-    my @user = Application::Model::User->select_all;
+    my $user = Application::Model::User->select_all;
 
-    my $text = $user[0]->{name};
+    use DDP; warn np $user;
+    warn np @$user;
+
+    my $text = $user->[0]->{name};
 
     # Render template "example/welcome.html.ep" with message
     $self->render(msg => "text -> $text");
