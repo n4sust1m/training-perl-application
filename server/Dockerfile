@@ -1,7 +1,5 @@
 FROM perl:5.32
 
-RUN mkdir /app
+RUN mkdir /opt/application
 RUN cpanm Carton
-WORKDIR /app
-
-ONBUILD RUN carton install
+WORKDIR /opt/application

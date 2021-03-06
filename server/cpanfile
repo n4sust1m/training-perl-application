@@ -1,0 +1,17 @@
+# Application Framework
+requires "Mojo";
+requires "Mojo::File";
+
+# DB Connector
+requires "Mojo::mysql";
+
+# OOP
+requires "Mouse";
+
+# Test
+requires "Test::More";
+requires "Test::Mojo";
+
+# Utilities
+requires "List::Util";
+requires "Data::Printer";
