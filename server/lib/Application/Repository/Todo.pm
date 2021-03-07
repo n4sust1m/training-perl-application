@@ -1,8 +1,7 @@
-package Application::Model::User;
+package Application::Repository::User;
+use Application::DB;
 
-use Application::Model;
-
-my $model = Application::Model->new();
+my $model = Application::DB->new();
 my $db = $model->handler->db;
 
 sub select_all {

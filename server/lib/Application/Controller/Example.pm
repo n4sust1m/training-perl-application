@@ -1,7 +1,7 @@
 package Application::Controller::Example;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 
-use Application::Model::User;
+use Application::Repository::Todo;
 
 # This action will render a template
 sub welcome ($self) {

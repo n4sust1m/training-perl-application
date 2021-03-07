@@ -1,6 +1,7 @@
 # Application Framework
 requires "Mojo";
 requires "Mojo::File";
+requires "Mojolicious::Routes";
 
 # DB Connector
 requires "Mojo::mysql";
